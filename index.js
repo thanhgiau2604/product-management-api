@@ -35,7 +35,6 @@ mongoose.mongoose.connect(
   }
 );
 
-console.log(mongoose.connection.readyState);
 productController(app);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));

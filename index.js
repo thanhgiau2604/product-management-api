@@ -5,6 +5,7 @@ const logger = require("morgan");
 const swaggerUi = require("swagger-ui-express");
 const YAML = require("yamljs");
 const swaggerDocument = YAML.load("./swagger.yaml");
+const productController = require("./api/controllers/productController.js");
 
 const PORT = process.env.PORT || 3000;
 
@@ -13,8 +14,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger("dev"));
-
-const productController = require("./api/controllers/productController");
 
 app.use(function (_, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");

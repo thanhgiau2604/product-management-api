@@ -31,6 +31,14 @@ module.exports = function (app) {
     );
   });
 
+  app.get("/product/:productId", parser, (req, res) => {
+    const id = req.params.productId;
+
+    Product.findOne({ _id: id }, function (err, data) {
+      res.send({ success: !err, error_msg: err?.message, data });
+    });
+  });
+
   app.put("/product/:productId", parser, (req, res) => {
     const id = req.params.productId;
     const { product_name, description, price, image_url } = req.body;

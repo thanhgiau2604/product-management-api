@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: Swagger Product Management - OpenAPI 3.0
+  description: CRUD API Example with Products
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+servers:
+  - url: https://product-mnt-api.herokuapp.com
+
+paths:
+  /products:
+    get:
+      tags:
+        - Product
+      summary: Get product list
+      responses:
+        "200":
+          $ref: "#/components/responses/200_products"
+  /product:
+    post:
+      tags:
+        - Product
+      summary: Create new product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductPayload"
+      responses:
+        "200":
+          $ref: "#/components/responses/200_product"
+
+  /product/{productId}:
+    get:
+      tags:
+        - Product
+      summary: Get a product info
+      parameters:
+        - $ref: "#/components/parameters/productId"
+      responses:
+        "200":
+          $ref: "#/components/responses/200_product"
+    put:
+      tags:
+        - Product
+      summary: Update a product info
+      parameters:
+        - $ref: "#/components/parameters/productId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductPayload"
+      responses:
+        "200":
+          $ref: "#/components/responses/200"
+    delete:
+      tags:
+        - Product
+      summary: Delete a product
+      parameters:
+        - $ref: "#/components/parameters/productId"
+      responses:
+        "200":
+          $ref: "#/components/responses/200"
+
+components:
+  parameters:
+    productId:
+      in: path
+      name: productId
+      required: true
+      description: product ID
+      schema:
+        type: string
+        example: "1a9d01dc-f397-471d-a54b-0d1eee3f5716"
+
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 637487ac37699b26fe36e6b5
+        product_name:
+          type: string
+          example: t-shirt
+        description:
+          type: string
+          example: description of product
+        price:
+          type: number
+          example: 50000
+        image_url:
+          type: string
+          example: https://picsum.photos/200/300
+        created_at:
+          type: number
+          example: 1668581292139
+        updated_at:
+          type: number
+          example: 1668581513275
+
+    ProductPayload:
+      type: object
+      properties:
+        product_name:
+          type: string
+          example: t-shirt
+        description:
+          type: string
+          example: description of product
+        price:
+          type: number
+          example: 50000
+        image_url:
+          type: string
+          example: https://picsum.photos/200/300
+
+  requestBodies:
+    Product:
+      description: Product object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Product"
+
+  responses:
+    ProductArray:
+      description: List of product
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Product"
+    200:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                description: success status
+                type: boolean
+                example: true
+              err_msg:
+                description: error message
+                type: string
+                example: null
+    200_product:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                description: Success status
+                type: boolean
+                example: true
+              err_msg:
+                description: error message
+                type: string
+                example: null
+              data:
+                $ref: "#/components/schemas/Product"
+
+    200_products:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                description: success status
+                type: boolean
+                example: true
+              err_msg:
+                description: error message
+                type: string
+                example: null
+              data:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"

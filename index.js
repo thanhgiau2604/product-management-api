@@ -2,6 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const logger = require("morgan");
+const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./swagger.yaml");
 
 const PORT = process.env.PORT || 3000;
 
@@ -34,5 +37,7 @@ mongoose.mongoose.connect(
 
 console.log(mongoose.connection.readyState);
 productController(app);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(PORT, () => console.log("App listening on PORT " + PORT));

@@ -19,8 +19,8 @@ paths:
         - Product
       summary: Get product list
       responses:
-        "200":
-          $ref: "#/components/responses/200_products"
+        '200':
+          $ref: '#/components/responses/200_products'
   /product:
     post:
       tags:
@@ -31,45 +31,45 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProductPayload"
+              $ref: '#/components/schemas/ProductPayload'
       responses:
-        "200":
-          $ref: "#/components/responses/200_product"
+        '200':
+          $ref: '#/components/responses/200_product'
 
   /product/{productId}:
     get:
       tags:
         - Product
-      summary: Get a product info
+      summary: Get detail product info
       parameters:
-        - $ref: "#/components/parameters/productId"
+        - $ref: '#/components/parameters/productId'
       responses:
-        "200":
-          $ref: "#/components/responses/200_product"
+        '200':
+          $ref: '#/components/responses/200_product'
     put:
       tags:
         - Product
       summary: Update a product info
       parameters:
-        - $ref: "#/components/parameters/productId"
+        - $ref: '#/components/parameters/productId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProductPayload"
+              $ref: '#/components/schemas/ProductPayload'
       responses:
-        "200":
-          $ref: "#/components/responses/200"
+        '200':
+          $ref: '#/components/responses/200'
     delete:
       tags:
         - Product
       summary: Delete a product
       parameters:
-        - $ref: "#/components/parameters/productId"
+        - $ref: '#/components/parameters/productId'
       responses:
-        "200":
-          $ref: "#/components/responses/200"
+        '200':
+          $ref: '#/components/responses/200'
 
 components:
   parameters:
@@ -80,7 +80,7 @@ components:
       description: product ID
       schema:
         type: string
-        example: "1a9d01dc-f397-471d-a54b-0d1eee3f5716"
+        example: '1a9d01dc-f397-471d-a54b-0d1eee3f5716'
 
   schemas:
     Product:
@@ -130,7 +130,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Product"
+            $ref: '#/components/schemas/Product'
 
   responses:
     ProductArray:
@@ -140,7 +140,7 @@ components:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/Product"
+              $ref: '#/components/schemas/Product'
     200:
       description: Success
       content:
@@ -172,7 +172,7 @@ components:
                 type: string
                 example: null
               data:
-                $ref: "#/components/schemas/Product"
+                $ref: '#/components/schemas/Product'
 
     200_products:
       description: Success
@@ -192,4 +192,4 @@ components:
               data:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Product"
+                  $ref: '#/components/schemas/Product'
